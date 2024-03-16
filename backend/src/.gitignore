@@ -1,0 +1,4 @@
+.env
+accounts.txt
+uploads
+**/__pycache__/
