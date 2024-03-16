@@ -36,7 +36,7 @@ export default function ID() {
     }, [id]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/me', {
+        axios.get('http://localhost:8001/me', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`
             }
@@ -61,7 +61,7 @@ export default function ID() {
         const file = files[index];
         const formData = new FormData();
         formData.append('patch', file);
-        axios.post(`http://localhost:8000/upload_patch/${index + 1}`, formData, {
+        axios.post(`http://localhost:8001/questions/${index + 1}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`

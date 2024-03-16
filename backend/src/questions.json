@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Print",
+    "repository": "https://github.com/kst164/ftb_print",
+    "points": 100
+  },
+  {
+    "title": "Calculator",
+    "repository": "https://github.com/jash-j3/Simple_Arithmetic_Anomaly",
+    "points": 100
+  },
+  {
+    "title": "React",
+    "repository": "https://github.com/akoolarni/tale-of-a-buggy-site",
+    "points": 100
+  },
+  {
+    "title": "FastAPI + Git Hooks",
+    "repository": "https://github.com/Monish-Asawa/Fix-the-bug-Question-Lambda-Elan",
+    "points": 100
+  },
+  {
+    "title": "Flutter",
+    "repository": "https://github.com/DikshantK2004/Flutter_bugs",
+    "points": 100
+  },
+  {
+    "title": "Database Conundrum",
+    "repository": "https://github.com/jash-j3/Database-Conundrum",
+    "points": 100
+  },
+  {
+    "title": "Golang",
+    "repository": "https://github.com/adhitht/fix_the_bug",
+    "points": 100
+  },
+  {
+    "title": "Rust",
+    "repository": "https://github.com/kst164/ftb_pick-a-day",
+    "points": 100
+  },
+  {
+    "title": "React",
+    "repository": "https://github.com/akoolarni/tale-of-a-buggy-site",
+    "points": 100
+  }
+]
