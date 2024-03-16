@@ -1,6 +1,5 @@
 from typing import Annotated
 import os
-import sys
 
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.security import OAuth2PasswordRequestForm
@@ -17,8 +16,8 @@ async def login_for_access_token(
     return generate_access_token(form_data.username, form_data.password)
 
 
-@app.get("/users/me/")
-async def read_users_me(
+@app.get("/me")
+async def get_logged_in_team(
     current_user: Annotated[int, Depends(get_current_team)]
 ) -> int:
     return current_user
