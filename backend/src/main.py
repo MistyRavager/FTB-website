@@ -2,11 +2,20 @@ from typing import Annotated
 import os
 
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 
 from auth import Token, get_current_team, generate_access_token
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/token")
