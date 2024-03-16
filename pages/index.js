@@ -28,7 +28,7 @@ export default function Home() {
   const submitCreds = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8001/token', e.target)
+      const res = await axios.post('https://ftb.iith.dev/backend/token', e.target)
       localStorage.setItem('access_token', res.data.access_token)
       setLogin(false)
     } catch (err) {
@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8001/me', {
+    axios.get('https://ftb.iith.dev/backend/me', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`
       }
