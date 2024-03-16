@@ -1,9 +1,16 @@
-export default function BugCard() {
+import { useRouter } from "next/router"
+
+
+export default function BugCard({title}) {
+  const router = useRouter()
+  
     return (
-     <div className=''>
-      <div className='bg-black/80 w-[20rem] h-[20rem] rounded-lg shadow-md px-2 flex flex-col gap-2 items-center justify-center'>
-        <h2 className='text-4xl bg-white text-black uppercase p-2 rounded-md'>Flutter</h2>
-        <button className='bg-blue-500 underline p-2 rounded-md'>Start Challenge!</button>
+     <div className='cool_shadow  w-[20rem] h-[10rem] hover:-translate-y-1 transition-all'>
+      <div className=' flex flex-col gap-2 items-center justify-center'>
+        <h2 className='text-4xl text-white  p-2'>{title}</h2>
+        <button className='text-white text-xl p-2 rounded-md' onClick={() => {
+          router.push(`/challenge/${title}`)
+        }}>Start Challenge!</button>
       </div>
      </div>
     )
