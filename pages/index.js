@@ -90,7 +90,7 @@ export default function Home() {
                 <BugCard
                   key={index}
                   title={challenge.title}
-                  index={index}
+                  index={index + 1}
                 />
               );
             })}

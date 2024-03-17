@@ -76,7 +76,7 @@ export default function ID() {
     formData.append("patch", file);
     axios
       .post(
-        `${process.env.NEXT_PUBLIC_HOSTNAME}/questions/${parseInt(id) + 1}`,
+        `${process.env.NEXT_PUBLIC_HOSTNAME}/questions/${parseInt(id)}`,
         formData,
         {
           headers: {
@@ -101,7 +101,7 @@ export default function ID() {
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("href", url);
-    link.setAttribute("download", "patch.diff");
+    link.setAttribute("download", "last.patch");
     link.click();
   }
 
@@ -113,10 +113,11 @@ export default function ID() {
             Fix The Bug
           </h1>
           <p className="text-white text-2xl mt-[3rem]">
-            Please click below to find the source code and instructions
+            Please click below to find the source code and instructions for
+            <span className="text-pink-600"> {data[parseInt(id) - 1]?.title}</span>
           </p>
           <p className="text-white text-2xl mt-10">
-            Points: {data[parseInt(id)]?.points}
+            Points: {data[parseInt(id) - 1]?.points}
           </p>
           <p className="text-white text-2xl mt-10">
             Download the latest submission:{" "}
@@ -136,14 +137,14 @@ export default function ID() {
             <a
               target="_blank"
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
-              href={data[parseInt(id)]?.repository}
+              href={data[parseInt(id) - 1]?.repository}
             >
               GitHub
             </a>
             <a
               target="_blank"
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
-              href={data[title]?.repository + "/blob/master/README.md"}
+              href={data[parseInt(id) - 1]?.repository + "/blob/master/README.md"}
             >
               Instructions
             </a>
@@ -158,7 +159,7 @@ export default function ID() {
             </p>
             <p className="text-white text-2xl mt-10">
               {" "}
-              {`${submissions} submissions done`}
+              {`${submissions}/3 submissions done`}
             </p>
             <input
               type="file"
@@ -168,6 +169,7 @@ export default function ID() {
             />
             <button
               onClick={() => handleUpload()}
+              disabled={submissions >= 3}
               className="text-white text-xl p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-all"
             >
               Upload
