@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   const [login, setLogin] = React.useState(true);
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState([]);
 
   const submitCreds = async (e) => {
     e.preventDefault();
