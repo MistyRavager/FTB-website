@@ -4,12 +4,31 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   const [login, setLogin] = React.useState(true);
+  //
+  const data = {
+    flutter: {
+      github: "https://github.com",
+      readme: "",
+    },
+    react: {
+      github: "",
+      readme: "",
+    },
+    vue: {
+      github: "",
+      readme: "",
+    },
+    angular: {
+      github: "",
+      readme: "",
+    },
+  };
 
   const submitCreds = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://ftb.iith.dev/backend/token",
+        ` ${process.env.DEV_HOSTNAME}/token`,
         e.target
       );
       localStorage.setItem("access_token", res.data.access_token);
@@ -21,7 +40,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("https://ftb.iith.dev/backend/me", {
+      .get(` ${process.env.DEV_HOSTNAME}/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -30,7 +49,7 @@ export default function Home() {
         console.log(res.data);
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.response?.status === 401) {
           setLogin(true);
         }
         console.log(err);
