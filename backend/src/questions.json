@@ -1,47 +1,42 @@
 [
   {
     "title": "Print",
-    "repository": "https://github.com/kst164/ftb_print",
+    "repository": "https://github.com/LambdaIITH/ftb_print",
     "points": 100
   },
   {
     "title": "Calculator",
-    "repository": "https://github.com/jash-j3/Simple_Arithmetic_Anomaly",
+    "repository": "https://github.com/LambdaIITH/ftb_Simple-Arithmetic-Anomaly",
     "points": 100
   },
   {
     "title": "React",
-    "repository": "https://github.com/akoolarni/tale-of-a-buggy-site",
+    "repository": "https://github.com/LambdaIITH/ftb_Tale-of-a-buggy-site",
     "points": 100
   },
   {
     "title": "FastAPI + Git Hooks",
-    "repository": "https://github.com/Monish-Asawa/Fix-the-bug-Question-Lambda-Elan",
+    "repository": "https://github.com/LambdaIITH/ftb_FastAPI-Git-CodeBase",
     "points": 100
   },
   {
     "title": "Flutter",
-    "repository": "https://github.com/DikshantK2004/Flutter_bugs",
+    "repository": "https://github.com/LambdaIITH/ftb_Flutter-CodeBase",
     "points": 100
   },
   {
     "title": "Database Conundrum",
-    "repository": "https://github.com/jash-j3/Database-Conundrum",
+    "repository": "https://github.com/LambdaIITH/ftb_Database-Conundrum",
     "points": 100
   },
   {
-    "title": "Golang",
-    "repository": "https://github.com/adhitht/fix_the_bug",
+    "title": "Buggy User Management",
+    "repository": "https://github.com/LambdaIITH/ftb_Golang-Buggy-UserManagement",
     "points": 100
   },
   {
-    "title": "Rust",
-    "repository": "https://github.com/kst164/ftb_pick-a-day",
-    "points": 100
-  },
-  {
-    "title": "React",
-    "repository": "https://github.com/akoolarni/tale-of-a-buggy-site",
+    "title": "Pick A Day",
+    "repository": "https://github.com/LambdaIITH/ftb_pick-a-day",
     "points": 100
   }
 ]
