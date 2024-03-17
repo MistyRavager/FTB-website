@@ -30,12 +30,10 @@ export default function ID() {
         }
         console.log(err);
       });
-    axios
-      .get(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions`)
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-      });
+    axios.get(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions`).then((res) => {
+      console.log(res.data);
+      setData(res.data);
+    });
   }, []);
 
   const handleInputChange = (index, event) => {
@@ -50,12 +48,16 @@ export default function ID() {
     const formData = new FormData();
     formData.append("patch", file);
     axios
-      .post(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions/${parseInt(id) + 1}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_HOSTNAME}/questions/${parseInt(id) + 1}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
       })
@@ -79,12 +81,14 @@ export default function ID() {
           </p>
           <div className="flex flex-row gap-10 justify-center items-center mt-10">
             <a
+              target="_blank"
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
               href={data[parseInt(id)]?.repository}
             >
               GitHub
             </a>
             <a
+              target="_blank"
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
               href={data[title]?.repository + "/blob/master/README.md"}
             >
