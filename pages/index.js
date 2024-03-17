@@ -4,31 +4,13 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   const [login, setLogin] = React.useState(true);
-  //
-  const data = {
-    flutter: {
-      github: "https://github.com",
-      readme: "",
-    },
-    react: {
-      github: "",
-      readme: "",
-    },
-    vue: {
-      github: "",
-      readme: "",
-    },
-    angular: {
-      github: "",
-      readme: "",
-    },
-  };
+  const [data, setData] = React.useState({});
 
   const submitCreds = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        ` ${process.env.DEV_HOSTNAME}/token`,
+        ` ${process.env.NEXT_PUBLIC_HOSTNAME}/token`,
         e.target
       );
       localStorage.setItem("access_token", res.data.access_token);
@@ -40,13 +22,14 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(` ${process.env.DEV_HOSTNAME}/me`, {
+      .get(` ${process.env.NEXT_PUBLIC_HOSTNAME}/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       })
       .then((res) => {
         console.log(res.data);
+        setLogin(false);
       })
       .catch((err) => {
         if (err.response?.status === 401) {
@@ -54,6 +37,12 @@ export default function Home() {
         }
         console.log(err);
       });
+    axios.get(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions`).then((res) => {
+      console.log(res.data);
+      setData(res.data);
+    }
+    );
+
   }, []);
 
   return (
@@ -96,13 +85,12 @@ export default function Home() {
           </>
         ) : (
           <>
-            {Object.keys(data).map((key) => {
+            {data?.map((challenge, index) => {
               return (
                 <BugCard
-                  key={key}
-                  title={key}
-                  github={data[key].github}
-                  readme={data[key].readme}
+                  key={index}
+                  title={challenge.title}
+                  index={index}
                 />
               );
             })}

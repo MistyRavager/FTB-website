@@ -2,33 +2,13 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 export default function ID() {
-  const data = {
-    flutter: {
-      github: "https://github.com",
-      readme: "",
-      bugNumbers: 4,
-    },
-    react: {
-      github: "",
-      readme: "",
-      bugNumbers: 4,
-    },
-    vue: {
-      github: "",
-      readme: "",
-      bugNumbers: 4,
-    },
-    angular: {
-      github: "",
-      readme: "",
-      bugNumbers: 4,
-    },
-  };
+  const [data, setData] = useState({});
 
   const router = useRouter();
   const { id } = router.query;
   const [title, setTitle] = useState(id);
   const [files, setFiles] = useState([]);
+  const [submissions, setSubmissions] = useState(0);
 
   useEffect(() => {
     setTitle(id);
@@ -36,7 +16,7 @@ export default function ID() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/backend/me", {
+      .get(`${process.env.NEXT_PUBLIC_HOSTNAME}/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
@@ -49,6 +29,12 @@ export default function ID() {
           window.location.href = "/";
         }
         console.log(err);
+      });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions`)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
       });
   }, []);
 
@@ -64,7 +50,7 @@ export default function ID() {
     const formData = new FormData();
     formData.append("patch", file);
     axios
-      .post(`${process.env.DEV_HOSTNAME}/questions/${index + 1}`, formData, {
+      .post(`${process.env.NEXT_PUBLIC_HOSTNAME}/questions/${parseInt(id) + 1}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -88,16 +74,19 @@ export default function ID() {
           <p className="text-white text-2xl mt-[3rem]">
             Please click below to find the source code and instructions
           </p>
+          <p className="text-white text-2xl mt-10">
+            Points: {data[parseInt(id)]?.points}
+          </p>
           <div className="flex flex-row gap-10 justify-center items-center mt-10">
             <a
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
-              href={data[title]?.github}
+              href={data[parseInt(id)]?.repository}
             >
               GitHub
             </a>
             <a
               className="p-3 cool_shadow text-white hover:-translate-y-1 transition-all w-[10rem] text-center text-xl"
-              href={data[title]?.github}
+              href={data[title]?.repository + "/blob/master/README.md"}
             >
               Instructions
             </a>
@@ -105,26 +94,28 @@ export default function ID() {
         </div>
 
         <div>
-          {Array.from({ length: data[title].bugNumbers }, (_, index) => (
-            <div key={index}>
-              <p className="text-white text-3xl mt-8 -ml-8">
-                {" "}
-                {`BUG ${index + 1}`}
-              </p>
-              <input
-                type="file"
-                onChange={(event) => handleInputChange(index, event)}
-                className="text-white"
-                placeholder={`Input ${index + 1}`}
-              />
-              <button
-                onClick={() => handleUpload(index)}
-                className="text-white text-xl p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-all"
-              >
-                Upload
-              </button>
-            </div>
-          ))}
+          <div>
+            <p className="text-white text-3xl mt-8 -ml-8">
+              {" "}
+              {`Submit your patch here`}
+            </p>
+            <p className="text-white text-2xl mt-10">
+              {" "}
+              {`${submissions + 1} submissions done`}
+            </p>
+            <input
+              type="file"
+              onChange={(event) => handleInputChange(submissions, event)}
+              className="text-white"
+              placeholder={`Input ${submissions + 1}`}
+            />
+            <button
+              onClick={() => handleUpload(submissions)}
+              className="text-white text-xl p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-all"
+            >
+              Upload
+            </button>
+          </div>
         </div>
       </div>
     )
